@@ -1,11 +1,7 @@
-
 var quoteKey = "9Bnh5taZmUmshhs1LHyWEz52mSb2p1YTlyKjsn3qjYWYWZDiXh";
-var quote;
-var author;
 
 //load initial content
 changer();
-updateTwitter();
 
 //Click on quote button
 $("#quote-btn").click(function(){
@@ -28,14 +24,14 @@ function changer(){
       quote = data.quote;
       author = data.author;
       changeQuote(quote, author); //changes quotation
-      updateTwitter(); //updates twitter
-   },
+      updateTwitter(quote, author); //updates twitter
+    },
     beforeSend: function(xhr) {
-    xhr.setRequestHeader("X-Mashape-Authorization", quoteKey); // Enter here your Mashape key
+      xhr.setRequestHeader("X-Mashape-Authorization", quoteKey);
     }
   });
 }
 
-function updateTwitter() {
+function updateTwitter(quote, author) {
   $("#twitter-link").attr('href', 'https://twitter.com/intent/tweet?url=[your URL]&text="' + quote + '" - ' + author);
 }
